@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'categories' => 'فئات',
+    'editCat' => 'تعديل الفئة',
+    'empty' => 'لا يوجد فئات في قاعدة البيانات',
+    'addcat' => 'اضف فئة',
+    'editcat' => 'تعديل فئة',
+    'name' => 'الاسم',
+    'description' => 'الوصف',
+    'image' => 'الصورة',
+    'more' => 'المزيد',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'status' => 'حالة',
+    'popular' => 'شائع',
+    'SEOTags' => 'اعدادات الSEO ',
+    'metatitle' => 'Meta Title',
+    'metakeyword' => 'Meta Keyword',
+    'metadescription' => 'Meta Description',
+    'submit' => 'حفظ',
+    'success' => 'تم انشاء الفئة بنجاح',
+    'delsuccess' => 'تم حذف الفئة بنجاح',
+    'editsuccess' => 'تم تعديل الفئة بنجاح',
+    'delfail' => 'الفئة غير موجودة',
+];

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5 d-flex justify-content-between">
+            {{-- <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="/dashboard">Dashboard</a></li> --}}
+            {{-- @if (!Request::is('dashboard'))
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><a href="{{ url(Request::path()) }}">{{ ucfirst(explode('/', Request::path())[0]) }}</a></li>
+            @endif --}}
+
+            @include('layouts.inc.changelangadmin')
+          </ol>
+          {{-- <h6 class="font-weight-bolder mb-0">{{ Route::currentRouteName() }}</h6> --}}
+        </nav>
+      </div>
+    </nav>
