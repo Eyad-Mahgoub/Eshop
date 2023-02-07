@@ -42,12 +42,12 @@ class AppServiceProvider extends ServiceProvider
         // Cache::put('featprods', $i);
         // Cache::put('featcats', $j);
 
-        // Cache::rememberForever('featprods', function () {
-        //     return Product::where('trending', 1)->take(15)->get();
-        // });
-        // Cache::rememberForever('featcats', function () {
-        //     return Category::where('popular', 1)->take(15)->get();
-        // });
+        Cache::rememberForever('featprods', function () {
+            return Product::where('trending', 1)->take(15)->get();
+        });
+        Cache::rememberForever('featcats', function () {
+            return Category::where('popular', 1)->take(15)->get();
+        });
 
     }
 }

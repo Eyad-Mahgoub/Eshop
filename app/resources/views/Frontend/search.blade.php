@@ -31,7 +31,7 @@
                         <div class="col-md-4 mb-3">
                             <a href="{{ route('product.details', ['category_slug' => $product->category->slug , 'product_slug' => $product->slug]) }}" class="text-decoration-none text-dark">
                                 <div class="card">
-                                    <img src="{{ asset('/uploads/product/'.$product->image) }}" alt="">
+                                    <img src="{{ asset('/uploads/product/'.$product->image) }}" alt="" class="w-100" height="250px">
                                     <div class="card-body">
                                         <h5>{{ $product->name }}</h5>
                                         <small>{{ $product->description }}</small>

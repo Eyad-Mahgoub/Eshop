@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderItemCollection;
 use App\Http\Resources\OrderResource;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\productTransaction;
 use App\Models\User;
 use App\Models\UserDetails;
+use App\Repositories\ProductRepository;
+use Database\Factories\OrderItemFactory;
 use Elastic\Elasticsearch\Response\Elasticsearch as ResponseElasticsearch;
 use Elasticsearch;
 use Exception;
@@ -22,6 +27,13 @@ use function PHPSTORM_META\map;
 
 class TestController extends Controller
 {
+    private ProductRepository $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+
     public function index($lang)
     {
         // App::setLocale($lang);
@@ -31,7 +43,6 @@ class TestController extends Controller
 
     public function test(Request $request)
     {
-        // dd($request->all());
         // $products = Product::all();
 
         // foreach ($products as $product)
@@ -46,25 +57,32 @@ class TestController extends Controller
         //     ]);
         // }
         // dd('done');
-        $response = Elasticsearch::search([
-            'index' => 'products',
-            'body' => [
-                'query' => [
-                    'bool' => [
-                        'must' => [
-                            ['match' => ['title-en' => 'mobile']],
-                        ],
-                    ],
-                ],
-            ],
-        ]);
+        // $response = Elasticsearch::search([
+        //     'index' => 'products',
+        //     'body' => [
+        //         'query' => [
+        //             'bool' => [
+        //                 'must' => [
+        //                     ['match' => ['title-en' => 'mobile']],
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        // ]);
         // $ids = array_column($response['hits']['hits'], '_id');
         // $prod = Product::query()->findMany($ids);
         // dd($prod->count());
-        $reponse = Elasticsearch::get([
-            'index' => 'products',
-            'id' => 'my_id',
-        ]);
-        dd($reponse);
+        // $reponse = Elasticsearch::get([
+        //     'index' => 'products',
+        //     'id' => '4',
+        // ]);
+        // dd($reponse);
+
+        // dd($this->productRepository->find(2)->getAttributes());
+        // $order = Order::factory()->create();
+        // $orders = OrderItem::factory()->count(20)->create();
+
+        dd(Auth::routes());
+        return new OrderItemCollection(OrderItem::paginate());
     }
 }
