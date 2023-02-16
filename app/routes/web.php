@@ -26,6 +26,8 @@ Route::get('/testgetall', [\App\Http\Controllers\TestController::class, 'testget
 Route::post('/testdeletemarker', [\App\Http\Controllers\TestController::class, 'testdelmarker']);
 Route::post('/testupdate', [\App\Http\Controllers\TestController::class, 'testupdate']);
 
+Route::post('/getproducts', [\App\Http\Controllers\admin\CouponController::class, 'getprods']);
+
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -142,6 +144,10 @@ Route::group([
             Route::post('/delete-coupon/{coupon}', 'delete')    ->name('admin.coupons.delete');
 
             Route::get('/coupons/test', 'test');
+        });
+
+        Route::controller(\App\Http\Controllers\admin\DiscountedProductController::class)->group(function () {
+            Route::post('add-discounted-product', 'addProduct') ->name('admin.coupons.addproducts');
         });
 
         Route::fallback(function (Request $request) {

@@ -28,7 +28,7 @@ class Category extends Model implements TranslatableContract
         'image',
     ];
 
-    public function categories()
+    public function products()
     {
         return $this->hasMany(Product::class);
     }
