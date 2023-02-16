@@ -26,6 +26,12 @@
 
     <!-- SummerNote -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+
+    <!-- Tomtom Maps -->
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps.css'>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
 </head>
 <body class="g-sidenav-show  bg-gray-200">
 
@@ -44,7 +50,7 @@
     <script src="{{ asset('admin/js/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin/js/smooth-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin/js/material-dashboard.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     @yield('scripts')
     <script>

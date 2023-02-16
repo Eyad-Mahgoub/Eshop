@@ -49,6 +49,14 @@
             <span class="nav-link-text ms-1">{{ __('admin/sidebar.users') }}</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link text-white {{ Request::is('test') ? 'bg-gradient-primary' : '' }} " href="{{ url('/test') }}">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">map</i>
+            </div>
+            <span class="nav-link-text ms-1">Map Test</span>
+            </a>
+        </li>
 
       <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">

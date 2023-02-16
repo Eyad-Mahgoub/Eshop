@@ -1,0 +1,159 @@
+warning: LF will be replaced by CRLF in app/app/Http/Controllers/TestController.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/app/Models/Product.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/app/Models/ProductTranslation.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/resources/views/admin/product/create.blade.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/resources/views/layouts/admin.blade.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/resources/views/layouts/front.blade.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/resources/views/layouts/inc/sidebar.blade.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/routes/api.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in app/routes/web.php.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in storage/db-data/binlog.index.
+The file will have its original line endings in your working directory
+warning: LF will be replaced by CRLF in storage/db-data/ib_buffer_pool.
+The file will have its original line endings in your working directory
+[1mdiff --git a/app/app/Http/Controllers/TestController.php b/app/app/Http/Controllers/TestController.php[m
+[1mindex c2323ae..073c0c0 100644[m
+[1m--- a/app/app/Http/Controllers/TestController.php[m
+[1m+++ b/app/app/Http/Controllers/TestController.php[m
+[36m@@ -6,6 +6,7 @@[m
+ use App\Http\Resources\OrderResource;[m
+ use App\Http\Resources\ProductResource;[m
+ use App\Models\Category;[m
+[32m+[m[32muse App\Models\Marker;[m
+ use App\Models\Order;[m
+ use App\Models\OrderItem;[m
+ use App\Models\Product;[m
+[36m@@ -16,6 +17,7 @@[m
+ use Database\Factories\OrderItemFactory;[m
+ use Elastic\Elasticsearch\Response\Elasticsearch as ResponseElasticsearch;[m
+ use Elasticsearch;[m
+[32m+[m[32muse Elasticsearch\Endpoints\Update;[m
+ use Exception;[m
+ use Illuminate\Http\Request;[m
+ use Illuminate\Support\Facades\App;[m
+[36m@@ -43,46 +45,38 @@[m [mpublic function index($lang)[m
+ [m
+     public function test(Request $request)[m
+     {[m
+[31m-        // $products = Product::all();[m
+[32m+[m[32m        $markers = json_encode(Marker::all());[m
+[32m+[m[32m        return view('test.indexfinal', compact('markers'));[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function testsave(Request $request)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $data = $request->all();[m
+[32m+[m
+[32m+[m[32m        Marker::create($data);[m
+ [m
+[31m-        // foreach ($products as $product)[m
+[31m-        // {[m
+[31m-        //     Elasticsearch::index([[m
+[31m-        //         'id' => $product->id,[m
+[31m-        //         'index' => 'products',[m
+[31m-        //         'body' => [[m
+[31m-        //             'title-en' => $product->translate('en')->name,[m
+[31m-        //             'title-ar' => $product->translate('ar')->name,[m
+[31m-        //         ],[m
+[31m-        //     ]);[m
+[31m-        // }[m
+[31m-        // dd('done');[m
+[31m-        // $response = Elasticsearch::search([[m
+[31m-        //     'index' => 'products',[m
+[31m-        //     'body' => [[m
+[31m-        //         'query' => [[m
+[31m-        //             'bool' => [[m
+[31m-        //                 'must' => [[m
+[31m-        //                     ['match' => ['title-en' => 'mobile']],[m
+[31m-        //                 ],[m
+[31m-        //             ],[m
+[31m-        //         ],[m
+[31m-        //     ],[m
+[31m-        // ]);[m
+[31m-        // $ids = array_column($response['hits']['hits'], '_id');[m
+[31m-        // $prod = Product::query()->findMany($ids);[m
+[31m-        // dd($prod->count());[m
+[31m-        // $reponse = Elasticsearch::get([[m
+[31m-        //     'index' => 'products',[m
+[31m-        //     'id' => '4',[m
+[31m-        // ]);[m
+[31m-        // dd($reponse);[m
+[32m+[m[32m        return json_encode(Marker::all());[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function testgetall(Request $request)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return Marker::all();[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function testdelmarker(Request $request)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        Marker::find($request->id)->delete();[m
+[32m+[m[32m        return ['msg' => 'Marker Deleted'];[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    public function testupdate(Request $request)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        $marker = Marker::find($request->id);[m
+[32m+[m[32m        $marker->name = $request->name;[m
+[32m+[m[32m        $marker->description = $request->description;[m
+ [m
+[31m-        // dd($this->productRepository->find(2)->getAttributes());[m
+[31m-        // $order = Order::factory()->create();[m
+[31m-        // $orders = OrderItem::factory()->count(20)->create();[m
+[32m+[m[32m        $marker->update();[m
+ [m
+[31m-        dd(Auth::routes());[m
+[31m-        return new OrderItemCollection(OrderItem::paginate());[m
+[32m+[m[32m        return ['msg' => 'Marker Updated'];[m
+     }[m
+ }[m
+[1mdiff --git a/app/resources/views/layouts/admin.blade.php b/app/resources/views/layouts/admin.blade.php[m
+[1mindex 67e9bc2..eb357e9 100644[m
+[1m--- a/app/resources/views/layouts/admin.blade.php[m
+[1m+++ b/app/resources/views/layouts/admin.blade.php[m
+[36m@@ -26,6 +26,12 @@[m
+ [m
+     <!-- SummerNote -->[m
+     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">[m
+[32m+[m
+[32m+[m[32m    <!-- Tomtom Maps -->[m
+[32m+[m[32m    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/maps/maps.css'>[m
+[32m+[m
+[32m+[m[32m    <!-- Custom CSS -->[m
+[32m+[m[32m    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">[m
+ </head>[m
+ <body class="g-sidenav-show  bg-gray-200">[m
+ [m
+[36m@@ -44,7 +50,7 @@[m
+     <script src="{{ asset('admin/js/perfect-scrollbar.min.js') }}"></script>[m
+     <script src="{{ asset('admin/js/smooth-scrollbar.min.js') }}"></script>[m
+     <script src="{{ asset('admin/js/material-dashboard.min.js') }}"></script>[m
+[31m-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>[m
+[32m+[m[32m    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>[m
+     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>[m
+     @yield('scripts')[m
+     <script>[m
+[1mdiff --git a/app/resources/views/layouts/inc/sidebar.blade.php b/app/resources/views/layouts/inc/sidebar.blade.php[m
+[1mindex c1b910e..ff9db18 100644[m
+[1m--- a/app/resources/views/layouts/inc/sidebar.blade.php[m
+[1m+++ b/app/resources/views/layouts/inc/sidebar.blade.php[m
+[36m@@ -49,6 +49,14 @@[m
+             <span class="nav-link-text ms-1">{{ __('admin/sidebar.users') }}</span>[m
+             </a>[m
+         </li>[m
+[32m+[m[32m        <li class="nav-item">[m
+[32m+[m[32m            <a class="nav-link text-white {{ Request::is('test') ? 'bg-gradient-primary' : '' }} " href="{{ url('/test') }}">[m
+[32m+[m[32m            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">[m
+[32m+[m[32m                <i class="material-icons opacity-10">map</i>[m
+[32m+[m[32m            </div>[m
+[32m+[m[32m            <span class="nav-link-tex

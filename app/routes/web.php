@@ -7,7 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
+use PHPUnit\Framework\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', [\App\Http\Controllers\TestController::class, 'test']);
+Route::post('/testsave', [\App\Http\Controllers\TestController::class, 'testsave']);
+Route::get('/testgetall', [\App\Http\Controllers\TestController::class, 'testgetall']);
+Route::post('/testdeletemarker', [\App\Http\Controllers\TestController::class, 'testdelmarker']);
+Route::post('/testupdate', [\App\Http\Controllers\TestController::class, 'testupdate']);
 
 
 Route::group([
@@ -127,6 +131,13 @@ Route::group([
                     return redirect('products')->with('problem', 'Product Not Found');
                 });
             Route::post('/add-quantity', 'addQuantity')         ->name('admin.product.addqty');
+        });
+
+        Route::controller(\App\Http\Controllers\CouponController::class)->group(function () {
+            Route::get('/coupons', 'index')                     ->name('admin.coupons');
+            Route::get('/edit-coupon/{coupon}', 'edit')         ->name('admin.coupons.edit');
+            Route::get('/create-coupon/{coupon}', 'create')     ->name('admin.coupons.create');
+            Route::get('/coupons/test', 'test');
         });
 
         Route::fallback(function (Request $request) {
