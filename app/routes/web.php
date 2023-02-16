@@ -135,8 +135,12 @@ Route::group([
 
         Route::controller(\App\Http\Controllers\admin\CouponController::class)->group(function () {
             Route::get('/coupons', 'index')                     ->name('admin.coupons');
+            Route::get('/create-coupon', 'create')              ->name('admin.coupons.create');
             Route::get('/edit-coupon/{coupon}', 'edit')         ->name('admin.coupons.edit');
-            Route::get('/create-coupon/{coupon}', 'create')     ->name('admin.coupons.create');
+            Route::post('/ceate-coupon', 'register')            ->name('admin.coupons.store');
+            Route::post('/edit-coupon', 'update')               ->name('admin.coupons.update');
+            Route::post('/delete-coupon/{coupon}', 'delete')    ->name('admin.coupons.delete');
+
             Route::get('/coupons/test', 'test');
         });
 

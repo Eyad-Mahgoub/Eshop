@@ -27,6 +27,7 @@
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Code</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Value</th>
                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">More</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,8 +39,8 @@
                             <td class="text-center"><p>{{ $coupon->value }}</p></td>
                             <td class="text-center"><p>{{ $coupon->type == 1 ? 'percentage' : 'flat' }}</p></td>
                             <td class="text-center">
-                                <a href="{{ route('admin.coupon.edit', ['coupon' => $coupon]) }}" class="btn btn-primary">{{ __('admin/categories.edit') }}</a>
-                                <a href="{{ route('admin.coupon.delete', ['coupon' => $coupon]) }}" class="btn btn-primary">{{ __('admin/categories.delete') }}</a>
+                                <a href="{{ route('admin.coupons.edit', ['coupon' => $coupon]) }}" class="btn btn-primary">{{ __('admin/categories.edit') }}</a>
+                                <a href="{{ route('admin.coupons.delete', ['coupon' => $coupon]) }}" class="btn btn-primary">{{ __('admin/categories.delete') }}</a>
                             </td>
                         @endforeach
                     </tbody>

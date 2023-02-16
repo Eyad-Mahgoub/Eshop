@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code');
             $table->string('name');
             $table->integer('value');
-            $table->integer('max_amount');
+            $table->integer('max_amount')->nullable();
             $table->tinyInteger('type');
             $table->date('start_date');
             $table->date('end_date');

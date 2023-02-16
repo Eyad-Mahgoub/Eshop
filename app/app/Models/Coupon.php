@@ -17,8 +17,8 @@ class Coupon extends Model
         'value',
         'max_amount',
         'type',
-        'start_at',
-        'end_at',
+        'start_date',
+        'end_date',
     ];
 
     public function products()

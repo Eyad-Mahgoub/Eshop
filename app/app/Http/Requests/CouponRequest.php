@@ -24,11 +24,11 @@ class CouponRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => ['required'],
+            'name'          => ['required', 'unique:coupons,name'],
             'code'          => ['required'],
             'value'         => ['required'],
-            'max_amount'    => ['required'],
             'type'          => ['required'],
+            'max_amount'    => ['exclude_if:type,0', 'required'],
             'start_date'    => ['required', 'date'],
             'end_date'      => ['required', 'date'],
         ];

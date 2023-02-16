@@ -18,19 +18,30 @@ class CouponController extends Controller
 
     public function edit(Coupon $coupon)
     {
-        return view('admin.coupons.edit', compact('coupons'));
+        return view('admin.coupons.edit', compact('coupon'));
     }
 
-    public function create(Coupon $coupon)
+    public function create()
     {
-        $coupons = Coupon::all();
-        return view('admin.coupons.create', compact('coupons'));
+        return view('admin.coupons.create');
     }
 
     public function register(CouponRequest $request)
     {
         Coupon::create($request->validated());
         return redirect()->route('admin.coupons')->with('message', 'Coupon created succesfully');
+    }
+
+    public function update(CouponRequest $request)
+    {
+        Coupon::find($request->id)->update($request->validated());
+        return redirect()->route('admin.coupons')->with('message', 'Coupon Edited succesfully');
+    }
+
+    public function delete(Coupon $coupon)
+    {
+        $coupon->delete();
+        return redirect()->back()->with('message', 'deleted succesfully');
     }
 
     public function addProduct(Request $request)
