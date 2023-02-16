@@ -133,7 +133,7 @@ Route::group([
             Route::post('/add-quantity', 'addQuantity')         ->name('admin.product.addqty');
         });
 
-        Route::controller(\App\Http\Controllers\CouponController::class)->group(function () {
+        Route::controller(\App\Http\Controllers\admin\CouponController::class)->group(function () {
             Route::get('/coupons', 'index')                     ->name('admin.coupons');
             Route::get('/edit-coupon/{coupon}', 'edit')         ->name('admin.coupons.edit');
             Route::get('/create-coupon/{coupon}', 'create')     ->name('admin.coupons.create');
